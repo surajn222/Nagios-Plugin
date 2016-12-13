@@ -7,9 +7,16 @@ then
         echo "Missing parameters! Syntax: ./check_service.sh service_name"
         exit 3
 fi
-if ps ax | grep -v grep | grep $1 > /dev/null
+
+#echo $1
+#ser="apache2sda"
+#result="$(/bin/ps -ef | /bin/grep -v /bin/grep | /bin/grep $1 | wc -l)"
+#echo $result
+
+if (( $(ps ax | grep -v grep | grep $1 | wc -l) > 2 ))
+#if ps ax | grep -v grep | grep $1 > /dev/null
 then
-    echo "OK, $SERVICE service is running"
+    echo  "Service name: $1 Count: $result OK, $SERVICE service is running"
         exit 0
 else
     echo "CRITICAL , $SERVICE service is not running"
